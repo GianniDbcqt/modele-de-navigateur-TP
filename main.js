@@ -78,4 +78,8 @@ app.whenReady().then(() => {
   win.on('resized', () => {
     fitViewToWin();
   });
+
+  ipcMain.on('update-url', (event, url) => {
+    win.webContents.send('url-updated', url); // Envoyer l'URL mise à jour au processus de rendu
+  });
 })
