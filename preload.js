@@ -10,5 +10,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   goToPage: (url) => ipcRenderer.invoke('go-to-page', url),
   currentUrl: () => ipcRenderer.invoke('current-url'),
   onUpdateUrl: (callback) => ipcRenderer.on('update-url', (_event, url) => callback(url)),
-  updateUrl: (url) => ipcRenderer.send('update-url', url)
+  updateUrl: (url) => ipcRenderer.send('update-url', url),
+  openIncognitoWindow: () => ipcRenderer.send('open-incognito-window'),
+  openCognitoWindow: () => ipcRenderer.send('open-cognito-window')
 });

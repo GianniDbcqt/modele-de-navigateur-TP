@@ -13,12 +13,12 @@ export class IncognitoToggleComponent {
   constructor(private browserService: BrowserService) {}
 
   enableNormalMode() {
-    // Logique pour ouvrir une nouvelle fenêtre en mode normal
-    this.browserService.goToPage('https://amiens.unilasalle.fr'); // Ou la page par défaut
+    this.browserService.NormalMode();
+    this.browserService.goToPage('https://amiens.unilasalle.fr');
   }
 
   enableIncognitoMode() {
     this.browserService.enableIncognitoMode();
-    this.browserService.goToPage('https://amiens.unilasalle.fr'); // Ou une nouvelle page en mode incognito
+    this.browserService.goToPage('https://amiens.unilasalle.fr');
   }
 }

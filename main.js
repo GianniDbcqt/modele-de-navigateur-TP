@@ -82,4 +82,35 @@ app.whenReady().then(() => {
   ipcMain.on('update-url', (event, url) => {
     win.webContents.send('url-updated', url); // Envoyer l'URL mise à jour au processus de rendu
   });
+
+  ipcMain.on('open-incognito-window', () => {
+    const incognitoWindow = new BrowserWindow({
+      width: 800,
+      height: 800,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+      },
+    });
+    incognitoWindow.loadFile('incognito-mode.html');
+  
+    incognitoWindow.on('closed', () => {
+      incognitoWindow = null;
+    });
+  });
+
+  ipcMain.on('open-cognito-window', () => {
+    const cognitoWindow = new BrowserWindow({
+      width: 800,
+      height: 800,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+      },
+    });
+    cognitoWindow.loadFile('cognito-mode.html');
+  
+    cognitoWindow.on('closed', () => {
+      cognitoWindow = null;
+    });
+  });
+  
 })

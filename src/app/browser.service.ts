@@ -83,13 +83,28 @@ export class BrowserService {
     return students;
   }
 
-  enableIncognitoMode() {
+  NormalMode(){
     localStorage.setItem("students", JSON.stringify(this.addValues()));
-    console.log('Avant', localStorage, sessionStorage);
+    console.log('Historique',localStorage);
+    document.cookie = "username=Pierre; path=/; max-age=3600";
+    console.log('Cookie',document.cookie);
+    sessionStorage.setItem('username', 'Pierre');
+    console.log('Cache',sessionStorage);
+    this.electronAPI.openCognitoWindow();
+  }
+
+  enableIncognitoMode() {
     localStorage.clear();
     sessionStorage.clear();
-    console.log('Apres', localStorage, sessionStorage);
+    console.log('Historique', localStorage);
+    console.log('Cache',sessionStorage)
     this.clearCookies();
+    console.log('cookie',document.cookie);
+
+    this.electronAPI.openIncognitoWindow();
+    if (localStorage.length === 0 && document.cookie === "" && sessionStorage.length === 0) {
+      console.log('Les cookies et lhistorique et le cache ont été supprimés avec succès.');
+    }
   }
 
 private clearCookies() {
