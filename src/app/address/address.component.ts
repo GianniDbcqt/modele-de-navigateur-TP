@@ -33,6 +33,14 @@ export class AddressComponent {
   };
 
   goToPage(url: string) {
-    this.browserService.goToPage(url);
+    const finalUrl = this.addHttpsIfMissing(url);
+    this.browserService.goToPage(finalUrl);
+  }
+
+  private addHttpsIfMissing(url: string): string {
+    if (!/^https?:\/\//i.test(url)) {
+      return `https://${url}`;
+    }
+    return url;
   }
 }
